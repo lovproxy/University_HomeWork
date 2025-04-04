@@ -14,7 +14,7 @@ def interpolSearch(A, elem):
 def interpolSearchRec(A, elem, lo, hi):
     # если подмассив пустой ИЛИ elem за границами диапазона, то делать нечего
     if lo > hi or elem > A[hi] or elem < A[lo]:
-        return massiv
+        return -1
     # если левая и правая границы совпадают, то mid по формуле вычислять нельзя! (почему?)
     if lo == hi:
         mid = lo
@@ -35,7 +35,4 @@ def interpolSearchRec(A, elem, lo, hi):
 if __name__ == '__main__':
     elem = int(input())
     mass = list(map(int, input().split()))
-    if interpolSearch(mass, elem) == None:
-        print(None)
-    for x in massiv:
-            print(x, end = ' ')
+    print(interpolSearch(mass, elem))
