@@ -14,13 +14,14 @@ def interpolSearch(A, elem):
 def interpolSearchRec(A, elem, lo, hi):
     # если подмассив пустой ИЛИ elem за границами диапазона, то делать нечего
     if lo > hi or elem > A[hi] or elem < A[lo]:
-        return -1
+        return massiv
     # если левая и правая границы совпадают, то mid по формуле вычислять нельзя! (почему?)
     if lo == hi:
         mid = lo
     # иначе - вычисляем mid по формуле
     else:
         mid = lo + round((elem - A[lo]) * (hi - lo) / (A[hi] - A[lo]))
+        mid = max(lo, min(hi, mid))
         massiv.append(A[mid])
 
     # выполняем сравнение и рекурсивный вызов на одной из частей
