@@ -4,6 +4,8 @@ def interpolSearch(A, elem):
     # если искомый элемент за границами диапазона,то делать нечего
     if elem > A[len(A) - 1] or elem < A[0]:
         return None
+    global massiv
+    massiv = []
 
     # определим верхнюю границу и вызовем рекурсивную функцию
     right = len(A) - 1
