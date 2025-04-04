@@ -23,16 +23,16 @@ def interpolSearchRec(A, elem, lo, hi):
 
     # выполняем сравнение и рекурсивный вызов на одной из частей
     if A[mid] == elem:
-        return mid
+        return massiv
     elif A[mid] > elem:
         return interpolSearchRec(A, elem, lo, mid - 1)
     else:
         return interpolSearchRec(A, elem, mid + 1, hi)
 
-
-elem = int(input())
-mass = list(map(int, input().split()))
-if interpolSearch(mass, elem) == None:
-    print(None)
-for x in massiv:
-        print(x, end = ' ')
+if __name__ == '__main__':
+    elem = int(input())
+    mass = list(map(int, input().split()))
+    if interpolSearch(mass, elem) == None:
+        print(None)
+    for x in massiv:
+            print(x, end = ' ')
