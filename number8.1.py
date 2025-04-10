@@ -1,14 +1,15 @@
 class Graph:
     # конструктор, инициализирующий все необходимые поля необходимыми значениями
     def __init__(self, V = None, E = None):
-        self.v = {}
-        self.e = {}
+        self.vdict = {}
+        self.edict = {}
         if V != None:
             for x in V:
-                self.v[x] = None
+                self.vdict[x] = None
         if E != None:
             for x in E:
-                self.e[x] = None
+                self.edict[x] = None
+        self.vlist = []
     # метод конструирования строкового представления графа
     def __str__ (self):
         nl = '\n'
@@ -17,36 +18,39 @@ class Graph:
     # метод добавления метки вершине или ребру
     def __setitem__ (self, x, d):
         if type(x) is tuple:
-            self.e[x] = d
+            self.edict[x] = d
         else:
-            self.v[x] = d
+            self.vdict[x] = d
 
     # метод возврата метки вершины или ребра
     def __getitem__(self, x):
         if type(x) is tuple:
-            return self.e[x]
-        return self.v[x]
+            return self.edict[x]
+        return self.vdict[x]
 
+    def V(self):
+        return tuple(self.vdict.keys())
 
     # Добавляет в граф вершину v. Метка вершины должна быть None.
-    def add_vertex(self, v):
-        if v not in self.v.keys():
-            self.v[v] = None
+    def add_vertex(self, ver):
+        if ver not in self.vdict:
+            self.vdict[ver] = None
+            self.vlist.append(ver)
 
     # Добавляет в граф ориентированное ребро e. Ребро е представляется кортежем (класс tuple)
     # двух имён рёбер (v, u). Метка ребра устанавливается в None.
     def add_edge(self, e):
-        self.e[e] = None
+        self.edict[e] = None
 
     # генератор или итератор, перечисляющий все рёбра графа
     def edges(self):
-        return list(self.e.keys())
+        return list(self.edict.keys())
     # генератор или итератор, перечисляющий все вершины графа
     def vertices(self):
-        return (x for x in self.v)
+        return (x for x in self.vdict)
     # генератор или итератор, перечисляющий все рёбра, выходящие из вершины v
     def outgoing(self, v):
-        for x in self.e:
+        for x in self.edict:
             if x[0] == v:
                 yield x
 
@@ -54,6 +58,7 @@ class Graph:
 
 # Этот код менять не нужно. При корректной реализации класса Graph он должен выдать корректный результат
 # Раскомментируйте этот код, когда перестанете получать сообщения об ошибках
+'''
 g = Graph()
 g.add_vertex("u")
 g.add_vertex("v")
@@ -73,4 +78,4 @@ print(g["u"])
 print(g[("u", "v")])
 print(g[("v", "w")])
 g2 = Graph(["a", "b"], [("a", "b"), ("b", "a")])
-print(g2)
+print(g2)'''
