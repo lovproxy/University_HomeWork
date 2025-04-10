@@ -7,7 +7,7 @@ class Test_number2(unittest.TestCase):
         self.assertEqual(iS([1, 4, 7, 8, 10, 17, 21, 23, 26, 32, 36, 40, 41, 43, 44, 47, 49], 8), [7, 8])
 
     def test_positive2(self):
-        self.assertEqual(iS([1, 15, 25, 110, 265, 301, 405, 500, 600], 25), [1, 15, 25])
+        self.assertEqual(iS([1, 15, 25, 110, 265, 301, 405, 500, 600], 25), [15, 25])
 
     def test_granical(self):
         self.assertEqual(iS([1, 15, 100, 200, 350, 400], 500), None)
