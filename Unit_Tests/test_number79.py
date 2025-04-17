@@ -1,7 +1,7 @@
 import unittest
 from number79 import MyQueue
 
-class Test_number3(unittest.TestCase):
+class Test_number79(unittest.TestCase):
 
     def test_positive1(self):
         A = MyQueue()
