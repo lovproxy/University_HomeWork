@@ -1,22 +1,22 @@
 class Graph:
     # конструктор, инициализирующий все необходимые поля необходимыми значениями
-    def __init__(self, V = None, E = None):
+    def __init__(self, V=None, E=None):
         self.vdict = {}
         self.edict = {}
-        if V != None:
-            for x in V:
-                self.vdict[x] = None
-        if E != None:
-            for x in E:
-                self.edict[x] = None
-        self.vlist = []
+        self.vset = []
+        self.eset = []
+        if V is not None:
+            self.add_vertex(V)
+        if E is not None:
+            self.add_edge(E)
+
     # метод конструирования строкового представления графа
-    def __str__ (self):
+    def __str__(self):
         nl = '\n'
-        return f"vertices:\n{' '.join(map(str, [x for x in self.vertices()]))}\nedges:\n{nl.join(map(str, [f'{x[0]} -> {x[1]}' for x in self.edges()]))}"
+        return f"vertices:\n{' '.join(map(str, [i for i in self.vertices()]))}\nedges:\n{nl.join(map(str, [f'{x[0]} -> {x[1]}' for x in self.edges()]))}"
 
     # метод добавления метки вершине или ребру
-    def __setitem__ (self, x, d):
+    def __setitem__(self, x, d):
         if type(x) is tuple:
             self.edict[x] = d
         else:
@@ -25,29 +25,44 @@ class Graph:
     # метод возврата метки вершины или ребра
     def __getitem__(self, x):
         if type(x) is tuple:
-            return self.edict[x]
-        return self.vdict[x]
+            return self.edict[x] if x in self.eset else None
+        return self.vdict[x] if x in self.vset else None
 
+    @property
     def V(self):
         return tuple(self.vdict.keys())
 
     # Добавляет в граф вершину v. Метка вершины должна быть None.
     def add_vertex(self, ver):
-        if ver not in self.vdict:
-            self.vdict[ver] = None
-            self.vlist.append(ver)
+        if type(ver) is list:
+            for x in ver:
+                self.vset.append(x)
+                self.vdict[x] = None
+        else:
+            if ver not in self.vset:
+                self.vdict[ver] = None
+                self.vset.append(ver)
 
     # Добавляет в граф ориентированное ребро e. Ребро е представляется кортежем (класс tuple)
     # двух имён рёбер (v, u). Метка ребра устанавливается в None.
     def add_edge(self, e):
-        self.edict[e] = None
+        if type(e) is list:
+            for x in e:
+                self.eset.append(x)
+                self.edict[x] = None
+        else:
+            if e not in self.vset and type(e) is tuple:
+                self.edict[e] = None
+                self.eset.append(e)
 
     # генератор или итератор, перечисляющий все рёбра графа
     def edges(self):
         return list(self.edict.keys())
+
     # генератор или итератор, перечисляющий все вершины графа
     def vertices(self):
         return (x for x in self.vdict)
+
     # генератор или итератор, перечисляющий все рёбра, выходящие из вершины v
     def outgoing(self, v):
         for x in self.edict:
@@ -55,10 +70,9 @@ class Graph:
                 yield x
 
 
-
 # Этот код менять не нужно. При корректной реализации класса Graph он должен выдать корректный результат
 # Раскомментируйте этот код, когда перестанете получать сообщения об ошибках
-'''
+
 g = Graph()
 g.add_vertex("u")
 g.add_vertex("v")
@@ -78,4 +92,4 @@ print(g["u"])
 print(g[("u", "v")])
 print(g[("v", "w")])
 g2 = Graph(["a", "b"], [("a", "b"), ("b", "a")])
-print(g2)'''
+print(g2)
