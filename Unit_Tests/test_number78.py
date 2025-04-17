@@ -1,7 +1,7 @@
 import unittest
 from number78 import MyStack
 
-class Test_number3(unittest.TestCase):
+class Test_number78(unittest.TestCase):
 
     def test_positive1(self):
         A = MyStack([5,10,20,None,None,None,None,None,None,None])
